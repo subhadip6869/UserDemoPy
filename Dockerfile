@@ -9,7 +9,11 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=10014:10014 . .
+COPY . .
+
+# Recursively change ownership of the ENTIRE /app directory
+# This ensures the files and the newly generated __pycache__ folders belong to the user
+RUN chown -R 10014:10014 /app
 
 USER 10014
 
