@@ -1,7 +1,8 @@
 FROM python:3.11-alpine3.23
 
 # Create a non-root user with the UID Choreo requested
-RUN useradd -m -u 10014 choreouser
+# The -D flag stands for "disabled password," which is exactly what you want for a system user
+RUN adduser -D -u 10014 choreouser
 
 WORKDIR /app
 COPY requirements.txt .
